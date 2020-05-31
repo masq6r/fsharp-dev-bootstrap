@@ -1,0 +1,26 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/docker-existing-dockerfile
+{
+	"name": "F# development workspace",
+
+	"dockerComposeFile": "docker-compose.yml",
+
+	"service": "fsharp-dev",
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": ["ionide.ionide-fsharp"],
+
+	// Mount point
+	"workspaceFolder": "/home/fsharp/ws",
+	
+	// Uncomment the next line to run commands after the container is created - for example installing git.
+	"postCreateCommand": "sudo chown -R fsharp:fsharp /home/fsharp && bash /home/fsharp/init.sh && rm /home/fsharp/init.sh",
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/zsh"
+	},
+
+	// Connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "fsharp"
+}
