@@ -11,7 +11,10 @@
 	"extensions": ["ionide.ionide-fsharp"],
 
 	// Mount point
-	"workspaceFolder": "/home/fsharp/ws",
+  "workspaceFolder": "/home/fsharp/ws",
+  
+  // Forward ports
+  "forwardPorts": [8080],
 	
 	// Uncomment the next line to run commands after the container is created - for example installing git.
 	"postCreateCommand": "sudo chown -R fsharp:fsharp /home/fsharp && bash /home/fsharp/init.sh && rm /home/fsharp/init.sh",
