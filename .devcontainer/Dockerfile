@@ -57,5 +57,8 @@ RUN apt-get -y update \
 COPY init.sh /home/$USERNAME/
 COPY .paket /home/$USERNAME/.paket
 COPY paket.dependencies /home/$USERNAME/
+COPY package.json /home/$USERNAME/
+COPY webpack.config.web-dev.js /home/$USERNAME/
+COPY webpack.config.web.js /home/$USERNAME/
 
 USER $USERNAME   
