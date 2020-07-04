@@ -4,7 +4,9 @@ ARG USERNAME=fsharp
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-RUN apt-get -y update \
+RUN sed -i "s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list \
+    && apt-get clean \
+    && apt-get -y update \
     # Add sudo support for the non-root user
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
@@ -21,12 +23,6 @@ RUN apt-get -y update \
     && apt-get -y install mariadb-client \
     # Git installation
     && apt-get -y install git \
-    # Mono installation
-    && apt-get -y install gnupg ca-certificates \    
-    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-    && echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
-    && apt-get -y update \
-    && apt-get -y install mono-devel \
     # Python3 installation
     && apt-get -y install python3 \
     && apt-get -y install python3-pip \
@@ -55,7 +51,6 @@ RUN apt-get -y update \
 
 # Script to run when container is up
 COPY init.sh /home/$USERNAME/
-COPY .paket /home/$USERNAME/.paket
 COPY paket.dependencies /home/$USERNAME/
 COPY package.json /home/$USERNAME/
 COPY webpack.config.web-dev.js /home/$USERNAME/
